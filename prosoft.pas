@@ -10,15 +10,33 @@ uses
   FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
   FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.VCLUI.Wait, Data.DB,
   FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
-  FireDAC.DApt, Vcl.Grids, Vcl.DBGrids, FireDAC.Comp.DataSet;
+  FireDAC.DApt, Vcl.Grids, Vcl.DBGrids, FireDAC.Comp.DataSet, Vcl.StdCtrls,
+  Vcl.Menus, Vcl.Mask, Vcl.DBCtrls;
 
 type
   TForm1 = class(TForm)
-    FDManager: TFDManager;
-    FDConnection: TFDConnection;
-    FDQuery1: TFDQuery;
-    DBGrid1: TDBGrid;
-    DataSource1: TDataSource;
+    DBGrid_flat: TDBGrid;
+    Edit_street: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    MainMenu: TMainMenu;
+    N1: TMenuItem;
+    Edit3: TEdit;
+    Label1: TLabel;
+    PopupMenu_flat: TPopupMenu;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    N6: TMenuItem;
+    N7: TMenuItem;
+    DataSource_flat: TDataSource;
+    DBEdit_metr: TDBEdit;
+    DBEdit_flat: TDBEdit;
+    procedure FormActivate(Sender: TObject);
+    procedure N7Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,5 +49,25 @@ var
 implementation
 
 {$R *.dfm}
+
+uses Unit_db, Unit_flat;
+
+procedure TForm1.FormActivate(Sender: TObject);
+begin
+      Self.DBEdit_metr.DataField := 'id';
+      Self.DBEdit_flat.DataField := 'flat';
+
+      self.DBGrid_flat.Columns.Items[0].Width:=0;
+      self.DBGrid_flat.Columns.Items[1].Width:=0;
+
+
+
+
+end;
+
+procedure TForm1.N7Click(Sender: TObject);
+begin
+      form2.ShowModal;
+end;
 
 end.
