@@ -25,6 +25,8 @@ type
     Button_add_flat: TButton;
     DBEdit_spr_flat: TDBEdit;
     Button_cancel: TButton;
+    N2: TMenuItem;
+    N3: TMenuItem;
     procedure FormActivate(Sender: TObject);
     procedure N1Click(Sender: TObject);
     procedure Button_cancelClick(Sender: TObject);
@@ -105,8 +107,10 @@ begin
                   'f.id, '+
                   'f.street as "Улица", '+
                   'f.house_num as "Дом", '+
-                  'f.flat_num as "Квартира" '+
-                  'from flat f ';
+                  'f.flat_num as "Квартира", '+
+                  'em.factory_number as "Счетчик" '+
+                  'from flat f '+
+                  'left join electric_meter em on em.flat = f.id ';
     str_end := 'order by f.street ';
 
     on_change(self, DataModule_prosoft.FDQuery_spr_flat, str_start, str_end, 'where');
@@ -121,8 +125,10 @@ begin
                   'f.id, '+
                   'f.street as "Улица", '+
                   'f.house_num as "Дом", '+
-                  'f.flat_num as "Квартира" '+
-                  'from flat f ';
+                  'f.flat_num as "Квартира", '+
+                  'em.factory_number as "Счетчик" '+
+                  'from flat f '+
+                  'left join electric_meter em on em.flat = f.id ';
     str_end := 'order by f.street ';
 
     on_change(self, DataModule_prosoft.FDQuery_spr_flat, str_start, str_end, 'where');
@@ -137,19 +143,33 @@ begin
                   'f.id, '+
                   'f.street as "Улица", '+
                   'f.house_num as "Дом", '+
-                  'f.flat_num as "Квартира" '+
-                  'from flat f ';
+                  'f.flat_num as "Квартира", '+
+                  'em.factory_number as "Счетчик" '+
+                  'from flat f '+
+                  'left join electric_meter em on em.flat = f.id ';
     str_end := 'order by f.street ';
 
     on_change(self, DataModule_prosoft.FDQuery_spr_flat, str_start, str_end, 'where');
 end;
 
 procedure TForm2.FormActivate(Sender: TObject);
+var
+str_start:string;
+str_end:string;
 begin
       Self.DBEdit_spr_flat.DataField := 'id';
 
-      self.DBGrid_flat_spr.Columns.Items[0].Width:=0;
+    str_start := 'select '+
+                  'f.id, '+
+                  'f.street as "Улица", '+
+                  'f.house_num as "Дом", '+
+                  'f.flat_num as "Квартира", '+
+                  'em.factory_number as "Счетчик" '+
+                  'from flat f '+
+                  'left join electric_meter em on em.flat = f.id ';
+    str_end := 'order by f.street ';
 
+    on_change(self, DataModule_prosoft.FDQuery_spr_flat, str_start, str_end, 'where');
 end;
 
 procedure TForm2.FormClose(Sender: TObject; var Action: TCloseAction);

@@ -6,7 +6,6 @@ object DataModule_prosoft: TDataModule_prosoft
     Params.Strings = (
       'DriverID=SQLite'
       'Database=E:\[proj]\ProSoft\prosoft_db')
-    Connected = True
     Left = 48
     Top = 24
   end
@@ -19,7 +18,6 @@ object DataModule_prosoft: TDataModule_prosoft
     Top = 16
   end
   object FDQuery_flat: TFDQuery
-    Active = True
     Connection = FDConnection
     SQL.Strings = (
       'select '
@@ -36,11 +34,10 @@ object DataModule_prosoft: TDataModule_prosoft
       'enable  = 1'
       'GROUP by em.flat'
       'order by f.street')
-    Left = 152
-    Top = 96
+    Left = 64
+    Top = 168
   end
   object FDQuery_spr_flat: TFDQuery
-    Active = True
     Connection = FDConnection
     SQL.Strings = (
       'select'
@@ -50,11 +47,10 @@ object DataModule_prosoft: TDataModule_prosoft
       'f.flat_num as "'#1050#1074#1072#1088#1090#1080#1088#1072'"'
       'from flat f'
       'order by f.street')
-    Left = 152
-    Top = 160
+    Left = 200
+    Top = 168
   end
   object FDQuery_flat_metr: TFDQuery
-    Active = True
     Connection = FDConnection
     SQL.Strings = (
       'select em.factory_number, '
@@ -62,12 +58,25 @@ object DataModule_prosoft: TDataModule_prosoft
       'em.Date_next_ver  '
       'from electric_meter em '
       'where em.flat = 3')
-    Left = 152
-    Top = 232
+    Left = 64
+    Top = 224
   end
   object FDQuery_flat_value: TFDQuery
     Connection = FDConnection
-    Left = 152
-    Top = 304
+    Left = 64
+    Top = 280
+  end
+  object FDQuery_spr_metr: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      'select '
+      'id,'
+      'factory_number as "'#1053#1086#1084#1077#1088'",'
+      'date_last_ver as "'#1044#1072#1090#1072' '#1087#1088#1086#1074#1077#1088#1082#1080'",'
+      'Date_next_ver as "'#1044#1072#1090#1072' '#1089#1083'. '#1087#1088#1086#1074'.",'
+      'flat as "'#1050#1086#1076' '#1050#1074#1072#1088#1090#1080#1088#1099'"'
+      'FROM electric_meter em ')
+    Left = 312
+    Top = 176
   end
 end

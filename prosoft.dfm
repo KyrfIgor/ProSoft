@@ -112,6 +112,7 @@ object Form1: TForm1
     Height = 21
     DataSource = DataSource_flat
     TabOrder = 5
+    Visible = False
     OnChange = DBEdit_metrChange
   end
   object DBEdit_flat: TDBEdit
@@ -121,6 +122,7 @@ object Form1: TForm1
     Height = 21
     DataSource = DataSource_flat
     TabOrder = 6
+    Visible = False
     OnChange = DBEdit_flatChange
   end
   object DBGrid_metr: TDBGrid
@@ -151,6 +153,34 @@ object Form1: TForm1
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
   end
+  object Edit_enter_val: TEdit
+    Left = 645
+    Top = 114
+    Width = 111
+    Height = 21
+    TabOrder = 9
+    Visible = False
+  end
+  object Button_enter: TButton
+    Left = 645
+    Top = 136
+    Width = 111
+    Height = 25
+    Caption = #1042#1074#1086#1076' '#1087#1086#1082#1072#1079#1072#1085#1080#1081
+    TabOrder = 10
+    Visible = False
+    OnClick = Button_enterClick
+  end
+  object Button_cancel: TButton
+    Left = 566
+    Top = 136
+    Width = 75
+    Height = 25
+    Caption = #1054#1090#1084#1077#1085#1072
+    TabOrder = 11
+    Visible = False
+    OnClick = Button_cancelClick
+  end
   object MainMenu: TMainMenu
     Left = 8
     Top = 8
@@ -162,20 +192,16 @@ object Form1: TForm1
       end
       object N6: TMenuItem
         Caption = #1057#1095#1077#1090#1095#1080#1082#1080
+        OnClick = N6Click
       end
     end
   end
   object PopupMenu_flat: TPopupMenu
     Left = 232
     Top = 312
-    object N3: TMenuItem
-      Caption = #1059#1089#1090#1072#1085#1086#1074#1080#1090#1100' '#1089#1095#1077#1090#1095#1080#1082' '#1074' '#1082#1074#1072#1088#1090#1080#1088#1091
-    end
-    object N4: TMenuItem
-      Caption = #1047#1072#1084#1077#1085#1072' '#1089#1095#1077#1090#1095#1080#1082#1072
-    end
     object N5: TMenuItem
       Caption = #1055#1086#1082#1072#1079#1072#1085#1080#1103' '#1089#1095#1077#1090#1095#1080#1082#1072
+      OnClick = N5Click
     end
   end
   object DataSource_flat: TDataSource
@@ -192,5 +218,10 @@ object Form1: TForm1
     DataSet = DataModule_prosoft.FDQuery_flat_value
     Left = 496
     Top = 104
+  end
+  object FDQuery_for_sel: TFDQuery
+    Connection = DataModule_prosoft.FDConnection
+    Left = 696
+    Top = 24
   end
 end
