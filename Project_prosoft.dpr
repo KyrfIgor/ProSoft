@@ -4,7 +4,8 @@ uses
   Vcl.Forms,
   prosoft in 'prosoft.pas' {Form1},
   Unit_flat in 'Unit_flat.pas' {Form2},
-  Unit_db in 'Unit_db.pas' {DataModule_prosoft: TDataModule};
+  Unit_db in 'Unit_db.pas' {DataModule_prosoft: TDataModule},
+  my_function in 'my_function.pas';
 
 {$R *.res}
 

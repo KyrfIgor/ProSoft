@@ -17,6 +17,8 @@ type
     FDManager: TFDManager;
     FDQuery_flat: TFDQuery;
     FDQuery_spr_flat: TFDQuery;
+    FDQuery_flat_metr: TFDQuery;
+    FDQuery_flat_value: TFDQuery;
   private
     { Private declarations }
   public

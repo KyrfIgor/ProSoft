@@ -3,8 +3,8 @@
 	<Transactions>
     <Transaction>1899.12.30 00:00:00.000.954,=C:\Users\loki\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2022.07.23 17:39:53.079,=C:\Users\loki\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2022.07.23 17:42:07.533,E:\[proj]\ProSoft\prosoft.pas=C:\Users\loki\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2022.07.23 17:42:07.533,E:\[proj]\ProSoft\prosoft.dfm=C:\Users\loki\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2022.07.23 17:42:07.533,E:\[proj]\ProSoft\prosoft.pas=C:\Users\loki\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2022.07.23 17:42:24.579,E:\[proj]\ProSoft\Project_prosoft.dproj=C:\Users\loki\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>2022.07.25 17:15:27.786,=E:\[proj]\ProSoft\Unit2.pas</Transaction>
     <Transaction>2022.07.25 17:15:54.552,E:\[proj]\ProSoft\Unit_flat.dfm=E:\[proj]\ProSoft\Unit2.dfm</Transaction>
@@ -12,5 +12,7 @@
     <Transaction>2022.07.25 17:25:41.474,=E:\[proj]\ProSoft\Unit1.pas</Transaction>
     <Transaction>2022.07.25 17:25:57.822,E:\[proj]\ProSoft\Unit_db.dfm=E:\[proj]\ProSoft\Unit1.dfm</Transaction>
     <Transaction>2022.07.25 17:25:57.822,E:\[proj]\ProSoft\Unit_db.pas=E:\[proj]\ProSoft\Unit1.pas</Transaction>
+    <Transaction>2022.07.25 22:51:12.944,=E:\[proj]\ProSoft\Unit1.pas</Transaction>
+    <Transaction>2022.07.25 22:51:56.475,E:\[proj]\ProSoft\my_function.pas=E:\[proj]\ProSoft\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

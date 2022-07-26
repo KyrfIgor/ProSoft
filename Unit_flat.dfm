@@ -45,6 +45,7 @@ object Form2: TForm2
     Width = 209
     Height = 21
     TabOrder = 0
+    OnChange = Edit_streetChange
   end
   object Edit_house: TEdit
     Left = 89
@@ -52,6 +53,7 @@ object Form2: TForm2
     Width = 209
     Height = 21
     TabOrder = 1
+    OnChange = Edit_houseChange
   end
   object Edit_flat: TEdit
     Left = 89
@@ -59,6 +61,7 @@ object Form2: TForm2
     Width = 209
     Height = 21
     TabOrder = 2
+    OnChange = Edit_flatChange
   end
   object DBGrid_flat_spr: TDBGrid
     Left = 8

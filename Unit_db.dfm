@@ -1,6 +1,6 @@
 object DataModule_prosoft: TDataModule_prosoft
   OldCreateOrder = False
-  Height = 332
+  Height = 446
   Width = 486
   object FDConnection: TFDConnection
     Params.Strings = (
@@ -52,5 +52,22 @@ object DataModule_prosoft: TDataModule_prosoft
       'order by f.street')
     Left = 152
     Top = 160
+  end
+  object FDQuery_flat_metr: TFDQuery
+    Active = True
+    Connection = FDConnection
+    SQL.Strings = (
+      'select em.factory_number, '
+      'em.date_last_ver, '
+      'em.Date_next_ver  '
+      'from electric_meter em '
+      'where em.flat = 3')
+    Left = 152
+    Top = 232
+  end
+  object FDQuery_flat_value: TFDQuery
+    Connection = FDConnection
+    Left = 152
+    Top = 304
   end
 end

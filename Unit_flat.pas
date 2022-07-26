@@ -30,6 +30,9 @@ type
     procedure Button_cancelClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button_add_flatClick(Sender: TObject);
+    procedure Edit_streetChange(Sender: TObject);
+    procedure Edit_houseChange(Sender: TObject);
+    procedure Edit_flatChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -44,7 +47,7 @@ implementation
 
 {$R *.dfm}
 
-uses Unit_db;
+uses Unit_db, prosoft, my_function;
 
 procedure on_edit(self: TForm2);
 begin
@@ -60,21 +63,22 @@ begin
       self.Button_cancel.Visible := false;
 end;
 
+
+
+
+
 procedure TForm2.Button_add_flatClick(Sender: TObject);
 var sel_str:string;
-s_street:string;
 begin
   if (self.Edit_street.Text <> '') and (self.Edit_house.Text <> '') and (self.Edit_flat.Text <> '') then
   begin
-          s_street := trim(self.Edit_street.Text);
-          s_street := s_street.ToLower;
-          s_street[1] := upcase(s_street[1]);
+
          sel_str := 'insert into flat ( '+
                     'street, '+
                     'house_num, '+
                     'flat_num '+
                     ') values ( '+
-                    char(39)+s_street+char(39)+', '+
+                    char(39)+trim(self.Edit_street.Text)+char(39)+', '+
                     char(39)+trim(self.Edit_house.Text)+char(39)+', '+
                     char(39)+trim(self.Edit_flat.Text)+char(39)+')';
 
@@ -90,6 +94,54 @@ end;
 procedure TForm2.Button_cancelClick(Sender: TObject);
 begin
       off_edit(self);
+end;
+
+procedure TForm2.Edit_flatChange(Sender: TObject);
+var
+str_start:string;
+str_end:string;
+begin
+    str_start := 'select '+
+                  'f.id, '+
+                  'f.street as "Улица", '+
+                  'f.house_num as "Дом", '+
+                  'f.flat_num as "Квартира" '+
+                  'from flat f ';
+    str_end := 'order by f.street ';
+
+    on_change(self, DataModule_prosoft.FDQuery_spr_flat, str_start, str_end, 'where');
+end;
+
+procedure TForm2.Edit_houseChange(Sender: TObject);
+var
+str_start:string;
+str_end:string;
+begin
+    str_start := 'select '+
+                  'f.id, '+
+                  'f.street as "Улица", '+
+                  'f.house_num as "Дом", '+
+                  'f.flat_num as "Квартира" '+
+                  'from flat f ';
+    str_end := 'order by f.street ';
+
+    on_change(self, DataModule_prosoft.FDQuery_spr_flat, str_start, str_end, 'where');
+end;
+
+procedure TForm2.Edit_streetChange(Sender: TObject);
+var
+str_start:string;
+str_end:string;
+begin
+    str_start := 'select '+
+                  'f.id, '+
+                  'f.street as "Улица", '+
+                  'f.house_num as "Дом", '+
+                  'f.flat_num as "Квартира" '+
+                  'from flat f ';
+    str_end := 'order by f.street ';
+
+    on_change(self, DataModule_prosoft.FDQuery_spr_flat, str_start, str_end, 'where');
 end;
 
 procedure TForm2.FormActivate(Sender: TObject);
