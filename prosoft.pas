@@ -78,6 +78,7 @@ implementation
 
 uses Unit_db, Unit_flat, my_function, Unit_metr;
 
+//процедура обновления экрана
 procedure local_change(self: TForm1);
 var
 str_start:string;
@@ -102,6 +103,7 @@ begin
      str_end :=  'order by f.street';
 
       on_change(self, DataModule_prosoft.FDQuery_flat, str_start, str_end, 'having');
+
       self.DBGrid_flat.Columns.Items[0].Width:=0;
       self.DBGrid_flat.Columns.Items[1].Width:=0;
       self.DBGrid_flat.Columns.Items[3].Width:=40;
@@ -146,6 +148,7 @@ begin
      self.Edit_metr.Enabled := true;
      self.DBGrid_metr.Enabled := true;
 
+
      sel_str := 'select '+
                 'max(mr.value) as "maxval" '+
                 'from meter_readings mr '+
@@ -181,7 +184,9 @@ begin
 
               except
                 on Exception : EConvertError do
-                  ShowMessage('Должно быть введено число');
+                 Application.MessageBox('Должно быть введено число', 'Ошибка',
+                   MB_OK + MB_ICONSTOP);
+
               end;
       end;
 
@@ -198,7 +203,8 @@ begin
                 'em.date_last_ver as "Дата посл. пр", '+
                 'em.Date_next_ver as "Дата сл. пр"'+
                 'from electric_meter em '+
-                'where em.flat = ' + self.DBEdit_flat.Text;
+                'where em.flat = ' + self.DBEdit_flat.Text + ' and ' +
+                'enable  = 1';
 
 
      if GLOBAL_END then

@@ -16,7 +16,8 @@ implementation
 
 uses Unit_flat, Unit_db;
 
-
+//процедура обновлени€ запроса
+//принимает на вход форму, компонент запрос к базе, начальна€ строка запроса, конечна€ строка запроса, критерий
 procedure on_change(my_form: TForm; MY_FDQuery: TFDQuery; str_start:string; str_end:string; having:string);
 var
 sel_str:string;
@@ -25,7 +26,6 @@ str_and:string;
 begin
 
       str_and := having;
-      //if (my_form.FindComponent('Button_add_flat') as TButton).Visible then  exit;
 
       sel_str := str_start;
       if (my_form.FindComponent('Edit_street') as TEdit).Text <> '' then

@@ -1,9 +1,10 @@
 object Form2: TForm2
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = #1050#1074#1072#1088#1090#1080#1088#1099
-  ClientHeight = 357
-  ClientWidth = 741
+  ClientHeight = 367
+  ClientWidth = 1071
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,8 +15,8 @@ object Form2: TForm2
   OnActivate = FormActivate
   OnClose = FormClose
   DesignSize = (
-    741
-    357)
+    1071
+    367)
   PixelsPerInch = 96
   TextHeight = 13
   object Label2: TLabel
@@ -38,6 +39,20 @@ object Form2: TForm2
     Width = 49
     Height = 13
     Caption = #1050#1074#1072#1088#1090#1080#1088#1072
+  end
+  object Label1: TLabel
+    Left = 671
+    Top = 109
+    Width = 136
+    Height = 13
+    Caption = #1046#1091#1088#1085#1072#1083' '#1079#1072#1084#1077#1085#1099' '#1089#1095#1077#1090#1095#1080#1082#1086#1074
+  end
+  object Label7: TLabel
+    Left = 89
+    Top = 2
+    Width = 167
+    Height = 13
+    Caption = #1053#1072#1095#1085#1080#1090#1077' '#1074#1074#1086#1076' '#1074' '#1087#1086#1083#1103' '#1076#1083#1103' '#1087#1086#1080#1089#1082#1072
   end
   object Edit_street: TEdit
     Left = 89
@@ -66,12 +81,17 @@ object Form2: TForm2
   object DBGrid_flat_spr: TDBGrid
     Left = 8
     Top = 128
-    Width = 725
+    Width = 657
     Height = 223
+    Hint = 
+      #1057#1086#1079#1076#1072#1090#1100' '#1085#1086#1074#1091#1102' '#1082#1074#1072#1088#1090#1080#1088#1091', '#1091#1089#1090#1072#1085#1086#1074#1082#1072' '#1080' '#1079#1072#1084#1077#1085#1072' '#1089#1095#1077#1090#1095#1080#1082#1072' - '#1055#1088#1072#1074#1072#1103' '#1082#1085#1086 +
+      #1087#1082#1072' '#1084#1099#1096#1080
     Anchors = [akLeft, akTop, akRight]
     DataSource = DataSource_flat_spr
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    ParentShowHint = False
     PopupMenu = PopupMenu_str_flat
+    ShowHint = True
     TabOrder = 3
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -96,7 +116,7 @@ object Form2: TForm2
     Height = 21
     DataSource = DataSource_flat_spr
     TabOrder = 5
-    Visible = False
+    OnChange = DBEdit_spr_flatChange
   end
   object Button_cancel: TButton
     Left = 89
@@ -107,6 +127,19 @@ object Form2: TForm2
     TabOrder = 6
     Visible = False
     OnClick = Button_cancelClick
+  end
+  object DBGrid1: TDBGrid
+    Left = 671
+    Top = 128
+    Width = 392
+    Height = 223
+    DataSource = DataSource_jornal
+    TabOrder = 7
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
   end
   object DataSource_flat_spr: TDataSource
     DataSet = DataModule_prosoft.FDQuery_spr_flat
@@ -128,5 +161,10 @@ object Form2: TForm2
       Caption = #1047#1072#1084#1077#1085#1072' '#1089#1095#1077#1090#1095#1080#1082#1072
       OnClick = N3Click
     end
+  end
+  object DataSource_jornal: TDataSource
+    DataSet = DataModule_prosoft.FDQuery_jornal
+    Left = 816
+    Top = 208
   end
 end

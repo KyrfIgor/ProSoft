@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.822,E:\[proj]\ProSoft\Unit_db.pas=E:\[proj]\ProSoft\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.552,E:\[proj]\ProSoft\Unit_flat.pas=E:\[proj]\ProSoft\Unit2.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.552,E:\[proj]\ProSoft\Unit_flat.dfm=E:\[proj]\ProSoft\Unit2.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.724,E:\[proj]\ProSoft\Unit_replace_metr.pas=E:\[proj]\ProSoft\Unit3.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.475,E:\[proj]\ProSoft\my_function.pas=E:\[proj]\ProSoft\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.079,=C:\Users\loki\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.533,E:\[proj]\ProSoft\prosoft.pas=C:\Users\loki\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.552,E:\[proj]\ProSoft\Unit_flat.dfm=E:\[proj]\ProSoft\Unit2.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.822,E:\[proj]\ProSoft\Unit_db.dfm=E:\[proj]\ProSoft\Unit1.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.954,=C:\Users\loki\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.079,=C:\Users\loki\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.822,E:\[proj]\ProSoft\Unit_db.pas=E:\[proj]\ProSoft\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.005,E:\[proj]\ProSoft\Unit_metr.pas=E:\[proj]\ProSoft\Unit3.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.724,E:\[proj]\ProSoft\Unit_replace_metr.dfm=E:\[proj]\ProSoft\Unit3.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.533,E:\[proj]\ProSoft\prosoft.dfm=C:\Users\loki\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.579,E:\[proj]\ProSoft\Project_prosoft.dproj=C:\Users\loki\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>1899.12.30 00:00:00.000.005,E:\[proj]\ProSoft\Unit_metr.dfm=E:\[proj]\ProSoft\Unit3.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.786,=E:\[proj]\ProSoft\Unit2.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.263,=E:\[proj]\ProSoft\Unit3.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.944,=E:\[proj]\ProSoft\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.263,=E:\[proj]\ProSoft\Unit3.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.167,=E:\[proj]\ProSoft\Unit3.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.005,E:\[proj]\ProSoft\Unit_metr.pas=E:\[proj]\ProSoft\Unit3.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.474,=E:\[proj]\ProSoft\Unit1.pas</Transaction>
-    <Transaction>2022.07.27 11:00:06.167,=E:\[proj]\ProSoft\Unit3.pas</Transaction>
-    <Transaction>2022.07.27 11:05:00.724,E:\[proj]\ProSoft\Unit_replace_metr.pas=E:\[proj]\ProSoft\Unit3.pas</Transaction>
-    <Transaction>2022.07.27 11:05:00.724,E:\[proj]\ProSoft\Unit_replace_metr.dfm=E:\[proj]\ProSoft\Unit3.dfm</Transaction>
   </Transactions>
 </BorlandProject>

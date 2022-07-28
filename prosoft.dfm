@@ -79,9 +79,12 @@ object Form1: TForm1
     Top = 136
     Width = 220
     Height = 248
+    Hint = #1042#1074#1086#1076' '#1087#1086#1082#1072#1079#1072#1085#1080#1081' '#1089#1095#1077#1090#1095#1080#1082#1072' - '#1087#1088#1072#1074#1072#1103' '#1082#1085#1086#1087#1082#1072' '#1084#1099#1096#1080
     DataSource = DataSource_flat_value
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    ParentShowHint = False
     PopupMenu = PopupMenu_flat
+    ShowHint = True
     TabOrder = 11
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -96,6 +99,8 @@ object Form1: TForm1
     Height = 248
     DataSource = DataSource_flat
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    ParentShowHint = False
+    ShowHint = False
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -213,8 +218,8 @@ object Form1: TForm1
     end
   end
   object PopupMenu_flat: TPopupMenu
-    Left = 232
-    Top = 312
+    Left = 568
+    Top = 296
     object N5: TMenuItem
       Caption = #1055#1086#1082#1072#1079#1072#1085#1080#1103' '#1089#1095#1077#1090#1095#1080#1082#1072
       OnClick = N5Click

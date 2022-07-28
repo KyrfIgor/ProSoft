@@ -21,6 +21,7 @@ type
     FDQuery_flat_value: TFDQuery;
     FDQuery_spr_metr: TFDQuery;
     FDQuery_replace_metr: TFDQuery;
+    FDQuery_jornal: TFDQuery;
   private
     { Private declarations }
   public

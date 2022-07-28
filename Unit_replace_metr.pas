@@ -5,8 +5,14 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Vcl.StdCtrls;
-
+  Vcl.StdCtrls,
+      FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
+  FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.VCLUI.Wait, FireDAC.Comp.Client,
+   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  FireDAC.Comp.DataSet;
 type
   TForm_replace_metr = class(TForm)
     DataSource_replace_metr: TDataSource;
@@ -33,9 +39,11 @@ uses Unit_db;
 procedure TForm_replace_metr.Button1Click(Sender: TObject);
 var
 metr:integer;
+metr_old:Integer;
 flat:integer;
 sel_str:string;
 str_date:string;
+var FD_query_sel: TFDQuery;
 begin
        metr := DataModule_prosoft.FDQuery_replace_metr.FieldByName('id').Value ;
        flat := DataModule_prosoft.FDQuery_spr_flat.FieldByName('id').Value;
@@ -65,32 +73,60 @@ begin
 
 
            end;
-           close;
+
        end
        else
        begin
            //замена
            try
-                 sel_str := 'INSERT INTO jornal '+
-                            '(flat, metr, date_change) '+
-                            'VALUES('+inttostr(flat)+', '+inttostr(metr)+', '+#39+str_date+#39+')';
 
-                 DataModule_prosoft.FDConnection.ExecSQL(sel_str);
 
-                 sel_str := 'UPDATE electric_meter '+
-                          'SET  flat='+inttostr(flat)+', enable=1, date_install='+#39+str_date+#39+' '+
-                          'WHERE id='+inttostr(metr);
+               try
+                      FD_query_sel := TFDQuery.Create(nil);
+                      FD_query_sel.Connection := DataModule_prosoft.FDConnection;
 
-                 DataModule_prosoft.FDConnection.ExecSQL(sel_str);
 
-                Application.MessageBox('Счетчик был успешно заменен',
-                 'Успех', MB_OK + MB_ICONINFORMATION);
+                       sel_str := 'select id '+
+                                  'from electric_meter em '+
+                                  'where flat = '+inttostr(flat);
+                       FD_query_sel.SQL.Text := sel_str;
+                       FD_query_sel.Active := True;
+                       metr_old := FD_query_sel.FieldByName('id').Value;
+
+                       sel_str := 'INSERT INTO jornal '+
+                                  '(flat, metr, date_change, metr_old) '+
+                                  'VALUES('+inttostr(flat)+', '+inttostr(metr)+', '+#39+str_date+#39+', '+inttostr(metr_old)+')';
+                       DataModule_prosoft.FDConnection.ExecSQL(sel_str);
+
+                       sel_str := 'UPDATE electric_meter '+
+                                  'SET enable = 0 , flat = 0 '+
+                                  'WHERE id = '+ inttostr(metr_old);
+                       DataModule_prosoft.FDConnection.ExecSQL(sel_str);
+
+                       sel_str := 'UPDATE electric_meter '+
+                                'SET  flat='+inttostr(flat)+', enable=1, date_install='+#39+str_date+#39+' '+
+                                'WHERE id='+inttostr(metr);
+
+                       DataModule_prosoft.FDConnection.ExecSQL(sel_str);
+
+                      Application.MessageBox('Счетчик был успешно заменен',
+                       'Успех', MB_OK + MB_ICONINFORMATION);
+               finally
+                   FreeAndNil(FD_query_sel);
+               end;
+
+
+
            except
                 Application.MessageBox('Ошибка!' +
                   #13#10 + 'Попробуйте снова', 'Счетчик не заменен', MB_OK
                   + MB_ICONSTOP);
+
+
+
            end;
        end;
+       close;
 end;
 
 procedure TForm_replace_metr.FormShow(Sender: TObject);

@@ -1,9 +1,10 @@
 object Form_metr: TForm_metr
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = #1057#1095#1077#1090#1095#1080#1082#1080
-  ClientHeight = 380
-  ClientWidth = 730
+  ClientHeight = 360
+  ClientWidth = 732
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,8 +15,8 @@ object Form_metr: TForm_metr
   OnActivate = FormActivate
   OnClose = FormClose
   DesignSize = (
-    730
-    380)
+    732
+    360)
   PixelsPerInch = 96
   TextHeight = 13
   object Label2: TLabel
@@ -63,12 +64,15 @@ object Form_metr: TForm_metr
   object DBGrid_metr_spr: TDBGrid
     Left = 8
     Top = 128
-    Width = 714
+    Width = 716
     Height = 223
+    Hint = #1057#1086#1079#1076#1072#1090#1100' '#1089#1095#1077#1090#1095#1080#1082' - '#1055#1088#1072#1074#1072#1103' '#1082#1085#1086#1087#1082#1072' '#1084#1099#1096#1080
     Anchors = [akLeft, akTop, akRight]
     DataSource = DataSource_metr_spr
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    ParentShowHint = False
     PopupMenu = PopupMenu_metr_spr
+    ShowHint = True
     TabOrder = 3
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText

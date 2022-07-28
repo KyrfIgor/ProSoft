@@ -85,4 +85,9 @@ object DataModule_prosoft: TDataModule_prosoft
     Left = 400
     Top = 168
   end
+  object FDQuery_jornal: TFDQuery
+    Connection = FDConnection
+    Left = 512
+    Top = 168
+  end
 end

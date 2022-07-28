@@ -27,6 +27,10 @@ type
     Button_cancel: TButton;
     N2: TMenuItem;
     N3: TMenuItem;
+    DBGrid1: TDBGrid;
+    Label1: TLabel;
+    Label7: TLabel;
+    DataSource_jornal: TDataSource;
     procedure FormActivate(Sender: TObject);
     procedure N1Click(Sender: TObject);
     procedure Button_cancelClick(Sender: TObject);
@@ -37,6 +41,7 @@ type
     procedure Edit_flatChange(Sender: TObject);
     procedure N2Click(Sender: TObject);
     procedure N3Click(Sender: TObject);
+    procedure DBEdit_spr_flatChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -84,6 +89,8 @@ begin
     str_end := 'order by f.street ';
 
     on_change(self, DataModule_prosoft.FDQuery_spr_flat, str_start, str_end, 'where');
+
+    Self.DBEdit_spr_flat.DataField := 'id';
 end;
 
 
@@ -126,6 +133,42 @@ begin
       off_edit(self);
 end;
 
+procedure TForm2.DBEdit_spr_flatChange(Sender: TObject);
+var
+sel_str:string;
+flat:string;
+begin
+
+      if GLOBAL_END  then
+      begin
+                if Self.DBEdit_spr_flat.Text = '' then
+                begin
+                     flat := '0';
+                end
+                else
+                begin
+                     flat := Self.DBEdit_spr_flat.Text;
+                end;
+
+                sel_str := 'select '+
+                            'date_change as "Дата замены", '+
+                            'em.factory_number as "Ст. счетчик", '+
+                            'em2.factory_number as "Нов. счетчик" '+
+                            'from jornal j '+
+                            'join electric_meter em on em.id = j.metr_old '+
+                            'join electric_meter em2 on em2.id = j.metr '+
+                            'where j.flat = '+flat;
+
+                DataModule_prosoft.FDQuery_jornal.Active := false;
+                DataModule_prosoft.FDQuery_jornal.SQL.Text :=  sel_str;
+                DataModule_prosoft.FDQuery_jornal.Active := true;
+
+                self.DBGrid1.Columns.Items[1].Width:=140;
+                self.DBGrid1.Columns.Items[2].Width:=140;
+      end;
+
+end;
+
 procedure TForm2.Edit_flatChange(Sender: TObject);
 begin
       local_change(self);
@@ -157,12 +200,17 @@ begin
 end;
 
 procedure TForm2.N2Click(Sender: TObject);
+var
+row_sel:Integer;
 begin
 
        if DataModule_prosoft.FDQuery_spr_flat.FieldByName('Счетчик').IsNull then
        begin
            Form_replace_metr.ShowModal;
+           row_sel := DataModule_prosoft.FDQuery_spr_flat.RecNo;
            local_change(self);
+           DataModule_prosoft.FDQuery_spr_flat.RecNo := row_sel;
+
        end
        else
        begin
@@ -176,6 +224,8 @@ begin
 end;
 
 procedure TForm2.N3Click(Sender: TObject);
+var
+row_sel:Integer;
 begin
        if DataModule_prosoft.FDQuery_spr_flat.FieldByName('Счетчик').IsNull then
        begin
@@ -185,7 +235,9 @@ begin
        else
        begin
            Form_replace_metr.ShowModal;
+           row_sel := DataModule_prosoft.FDQuery_spr_flat.RecNo;
            local_change(self);
+           DataModule_prosoft.FDQuery_spr_flat.RecNo := row_sel;
        end;
 end;
 
