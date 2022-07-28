@@ -1,7 +1,7 @@
 object DataModule_prosoft: TDataModule_prosoft
   OldCreateOrder = False
   Height = 446
-  Width = 486
+  Width = 638
   object FDConnection: TFDConnection
     Params.Strings = (
       'DriverID=SQLite'
@@ -63,6 +63,7 @@ object DataModule_prosoft: TDataModule_prosoft
   end
   object FDQuery_flat_value: TFDQuery
     Connection = FDConnection
+    FormatOptions.AssignedValues = [fvFmtDisplayNumeric]
     Left = 64
     Top = 280
   end
@@ -76,7 +77,12 @@ object DataModule_prosoft: TDataModule_prosoft
       'Date_next_ver as "'#1044#1072#1090#1072' '#1089#1083'. '#1087#1088#1086#1074'.",'
       'flat as "'#1050#1086#1076' '#1050#1074#1072#1088#1090#1080#1088#1099'"'
       'FROM electric_meter em ')
-    Left = 312
-    Top = 176
+    Left = 296
+    Top = 168
+  end
+  object FDQuery_replace_metr: TFDQuery
+    Connection = FDConnection
+    Left = 400
+    Top = 168
   end
 end

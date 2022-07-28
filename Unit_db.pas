@@ -20,6 +20,7 @@ type
     FDQuery_flat_metr: TFDQuery;
     FDQuery_flat_value: TFDQuery;
     FDQuery_spr_metr: TFDQuery;
+    FDQuery_replace_metr: TFDQuery;
   private
     { Private declarations }
   public

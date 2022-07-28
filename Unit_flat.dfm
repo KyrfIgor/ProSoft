@@ -122,9 +122,11 @@ object Form2: TForm2
     end
     object N2: TMenuItem
       Caption = #1059#1089#1090#1072#1085#1086#1074#1080#1090#1100' '#1089#1095#1077#1090#1095#1080#1082
+      OnClick = N2Click
     end
     object N3: TMenuItem
       Caption = #1047#1072#1084#1077#1085#1072' '#1089#1095#1077#1090#1095#1080#1082#1072
+      OnClick = N3Click
     end
   end
 end

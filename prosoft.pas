@@ -38,11 +38,13 @@ type
     Label5: TLabel;
     DBGrid_metr: TDBGrid;
     Label6: TLabel;
-    DBGrid_value: TDBGrid;
     Edit_enter_val: TEdit;
     Button_enter: TButton;
     Button_cancel: TButton;
     FDQuery_for_sel: TFDQuery;
+    DBGrid_value: TDBGrid;
+    Label7: TLabel;
+    Label8: TLabel;
     procedure FormActivate(Sender: TObject);
     procedure N7Click(Sender: TObject);
     procedure Edit_streetChange(Sender: TObject);
@@ -58,6 +60,8 @@ type
     procedure N5Click(Sender: TObject);
     procedure Button_cancelClick(Sender: TObject);
     procedure Button_enterClick(Sender: TObject);
+    procedure DBGrid_flatDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -84,8 +88,10 @@ begin
                   'em.flat, '+
                   'f.street as "Улица", '+
                   'f.house_num as "Дом", '+
-                  'f.flat_num as "Квартира", '+
-                  'max(mr.value) as valmet '+
+                  'f.flat_num as "Кв.", '+
+                  'em.factory_number as "Счетчик", '+
+                  'max(mr.value) as valmet, '+
+                  'em.Date_next_ver as "Дата пов" '+
                   'from electric_meter em '+
                   'join meter_readings mr on mr.electric_meter = em.id '+
                   'join flat f on f.id = em.flat '+
@@ -98,6 +104,10 @@ begin
       on_change(self, DataModule_prosoft.FDQuery_flat, str_start, str_end, 'having');
       self.DBGrid_flat.Columns.Items[0].Width:=0;
       self.DBGrid_flat.Columns.Items[1].Width:=0;
+      self.DBGrid_flat.Columns.Items[3].Width:=40;
+      self.DBGrid_flat.Columns.Items[4].Width:=40;
+      self.DBGrid_flat.Columns.Items[5].Width:=90;
+
 end;
 
 
@@ -123,6 +133,7 @@ max_value:currency;
 input_value:currency;
 str_date:string;
 str_value:string;
+row_sel:integer;
 begin
      self.Edit_enter_val.Visible := false;
      self.Button_enter.Visible := false;
@@ -163,7 +174,9 @@ begin
                                 'VALUES('+self.DBEdit_metr.Text+', '+#39+str_date+#39+', '+str_value+')';
 
                      DataModule_prosoft.FDConnection.ExecSQL(sel_str);
+                     row_sel := DataModule_prosoft.FDQuery_flat.RecNo;
                      local_change(self);
+                     DataModule_prosoft.FDQuery_flat.RecNo := row_sel;
                 end;
 
               except
@@ -205,7 +218,7 @@ begin
 
        sel_str := 'select '+
                   'mr.date_deposition as "Дата", '+
-                  'mr.value as "Показание" '+
+                  '(mr.value) as "Показание" '+
                   'from meter_readings mr '+
                   'where mr.electric_meter = '+ self.DBEdit_metr.Text +
                   ' order by mr.date_deposition';
@@ -215,6 +228,20 @@ begin
           DataModule_prosoft.FDQuery_flat_value.SQL.Text := sel_str;
           DataModule_prosoft.FDQuery_flat_value.Active := True;
      end;
+     self.DBGrid_metr.Columns.Items[0].Width:=250;
+end;
+
+procedure TForm1.DBGrid_flatDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+dat_pov:string;
+begin
+       dat_pov := DataModule_prosoft.FDQuery_flat.FieldByName('Дата пов').Value;
+       if StrToDate(dat_pov) <= date() then
+       begin
+        self.DBGrid_flat.Canvas.Brush.Color:= $00B3D7F7;
+        self.DBGrid_flat.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+       end;
 
 end;
 
@@ -255,7 +282,7 @@ begin
       self.DBGrid_flat.Columns.Items[0].Width:=0;
       self.DBGrid_flat.Columns.Items[1].Width:=0;
 
-      self.DBGrid_metr.Columns.Items[0].Width:=100;
+      self.DBGrid_metr.Columns.Items[0].Width:=250;
 
 
 end;
@@ -293,6 +320,7 @@ end;
 procedure TForm1.N7Click(Sender: TObject);
 begin
       form2.ShowModal;
+      local_change(self);
 end;
 
 end.

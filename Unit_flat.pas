@@ -35,6 +35,8 @@ type
     procedure Edit_streetChange(Sender: TObject);
     procedure Edit_houseChange(Sender: TObject);
     procedure Edit_flatChange(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure N3Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -49,7 +51,7 @@ implementation
 
 {$R *.dfm}
 
-uses Unit_db, prosoft, my_function;
+uses Unit_db, prosoft, my_function, Unit_replace_metr;
 
 procedure on_edit(self: TForm2);
 begin
@@ -66,7 +68,23 @@ begin
 end;
 
 
+procedure local_change(self: TForm2);
+var
+str_start:string;
+str_end:string;
+begin
+    str_start := 'select '+
+                  'f.id, '+
+                  'f.street as "Улица", '+
+                  'f.house_num as "Дом", '+
+                  'f.flat_num as "Квартира", '+
+                  'em.factory_number as "Счетчик" '+
+                  'from flat f '+
+                  'left join electric_meter em on em.flat = f.id ';
+    str_end := 'order by f.street ';
 
+    on_change(self, DataModule_prosoft.FDQuery_spr_flat, str_start, str_end, 'where');
+end;
 
 
 procedure TForm2.Button_add_flatClick(Sender: TObject);
@@ -74,18 +92,28 @@ var sel_str:string;
 begin
   if (self.Edit_street.Text <> '') and (self.Edit_house.Text <> '') and (self.Edit_flat.Text <> '') then
   begin
+        try
+               sel_str := 'insert into flat ( '+
+                          'street, '+
+                          'house_num, '+
+                          'flat_num '+
+                          ') values ( '+
+                          char(39)+trim(self.Edit_street.Text)+char(39)+', '+
+                          char(39)+trim(self.Edit_house.Text)+char(39)+', '+
+                          char(39)+trim(self.Edit_flat.Text)+char(39)+')';
 
-         sel_str := 'insert into flat ( '+
-                    'street, '+
-                    'house_num, '+
-                    'flat_num '+
-                    ') values ( '+
-                    char(39)+trim(self.Edit_street.Text)+char(39)+', '+
-                    char(39)+trim(self.Edit_house.Text)+char(39)+', '+
-                    char(39)+trim(self.Edit_flat.Text)+char(39)+')';
+               DataModule_prosoft.FDConnection.ExecSQL(sel_str);
+               off_edit(self);
+               Application.MessageBox('Квартира успешно добавлена', 'Успех',
+                 MB_OK + MB_ICONINFORMATION);
 
-         DataModule_prosoft.FDConnection.ExecSQL(sel_str);
-         off_edit(self);
+               local_change(self);
+        except
+               Application.MessageBox('Квартира не добавлена. Ошибка.',
+                 'Ошибка', MB_OK + MB_ICONSTOP);
+
+        end;
+
   end
   else
   begin
@@ -99,77 +127,23 @@ begin
 end;
 
 procedure TForm2.Edit_flatChange(Sender: TObject);
-var
-str_start:string;
-str_end:string;
 begin
-    str_start := 'select '+
-                  'f.id, '+
-                  'f.street as "Улица", '+
-                  'f.house_num as "Дом", '+
-                  'f.flat_num as "Квартира", '+
-                  'em.factory_number as "Счетчик" '+
-                  'from flat f '+
-                  'left join electric_meter em on em.flat = f.id ';
-    str_end := 'order by f.street ';
-
-    on_change(self, DataModule_prosoft.FDQuery_spr_flat, str_start, str_end, 'where');
+      local_change(self);
 end;
 
 procedure TForm2.Edit_houseChange(Sender: TObject);
-var
-str_start:string;
-str_end:string;
 begin
-    str_start := 'select '+
-                  'f.id, '+
-                  'f.street as "Улица", '+
-                  'f.house_num as "Дом", '+
-                  'f.flat_num as "Квартира", '+
-                  'em.factory_number as "Счетчик" '+
-                  'from flat f '+
-                  'left join electric_meter em on em.flat = f.id ';
-    str_end := 'order by f.street ';
-
-    on_change(self, DataModule_prosoft.FDQuery_spr_flat, str_start, str_end, 'where');
+      local_change(self);
 end;
 
 procedure TForm2.Edit_streetChange(Sender: TObject);
-var
-str_start:string;
-str_end:string;
 begin
-    str_start := 'select '+
-                  'f.id, '+
-                  'f.street as "Улица", '+
-                  'f.house_num as "Дом", '+
-                  'f.flat_num as "Квартира", '+
-                  'em.factory_number as "Счетчик" '+
-                  'from flat f '+
-                  'left join electric_meter em on em.flat = f.id ';
-    str_end := 'order by f.street ';
-
-    on_change(self, DataModule_prosoft.FDQuery_spr_flat, str_start, str_end, 'where');
+       local_change(self);
 end;
 
 procedure TForm2.FormActivate(Sender: TObject);
-var
-str_start:string;
-str_end:string;
 begin
-      Self.DBEdit_spr_flat.DataField := 'id';
-
-    str_start := 'select '+
-                  'f.id, '+
-                  'f.street as "Улица", '+
-                  'f.house_num as "Дом", '+
-                  'f.flat_num as "Квартира", '+
-                  'em.factory_number as "Счетчик" '+
-                  'from flat f '+
-                  'left join electric_meter em on em.flat = f.id ';
-    str_end := 'order by f.street ';
-
-    on_change(self, DataModule_prosoft.FDQuery_spr_flat, str_start, str_end, 'where');
+      local_change(self);
 end;
 
 procedure TForm2.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -180,6 +154,39 @@ end;
 procedure TForm2.N1Click(Sender: TObject);
 begin
        on_edit(self);
+end;
+
+procedure TForm2.N2Click(Sender: TObject);
+begin
+
+       if DataModule_prosoft.FDQuery_spr_flat.FieldByName('Счетчик').IsNull then
+       begin
+           Form_replace_metr.ShowModal;
+           local_change(self);
+       end
+       else
+       begin
+          Application.MessageBox('Счетчик уже установлен', 'Предупреждение',
+            MB_OK + MB_ICONWARNING);
+
+       end;
+
+
+
+end;
+
+procedure TForm2.N3Click(Sender: TObject);
+begin
+       if DataModule_prosoft.FDQuery_spr_flat.FieldByName('Счетчик').IsNull then
+       begin
+            Application.MessageBox('Сначала установите счетчик', 'Предупреждение',
+            MB_OK + MB_ICONWARNING);
+       end
+       else
+       begin
+           Form_replace_metr.ShowModal;
+           local_change(self);
+       end;
 end;
 
 end.
